@@ -38,6 +38,9 @@ public class LifePane extends Pane {
     private int xCellCount = 100;
     private int yCellCount = 100;
     private boolean showColors = false;
+    private boolean showRed = false;
+    private boolean showGreen = false;
+    private boolean showBlue = false;
     private int iteration = 0;
     private final Label lbStatus;
     private final Canvas canvas;
@@ -167,7 +170,25 @@ public class LifePane extends Pane {
                 if (cells[x][y] == 0) {
                     g.setFill(Color.WHITE);
                 } else {
-                    if (showColors) {
+                    if (showRed) {
+                        int myBlue = 0;
+                        int myGreen = 0;
+                        int myRed = 255;
+                        Color redC = Color.rgb(myRed, myGreen, myBlue);
+                        g.setFill(redC);
+                    } else if (showGreen) {
+                        int myBlue = 0;
+                        int myGreen = 255;
+                        int myRed = 0;
+                        Color greenC = Color.rgb(myRed, myGreen, myBlue);
+                        g.setFill(greenC);
+                    } else if (showBlue) {
+                        int myBlue = 255;
+                        int myGreen = 0;
+                        int myRed = 0;
+                        Color blueC = Color.rgb(myRed, myGreen, myBlue);
+                        g.setFill(blueC);
+                    } else if (showColors) {
                         int myBlue = gen.nextInt(255);
                         int myGreen = gen.nextInt(255);
                         int myRed = gen.nextInt(255);
@@ -242,5 +263,29 @@ public class LifePane extends Pane {
 
     public boolean getShowColors() {
         return this.showColors;
+    }
+
+    public void setRed(boolean showRed) {
+        this.showRed = showRed;
+    }
+
+    public boolean getRed() {
+        return this.showRed;
+    }
+
+    public void setGreen(boolean showGreen) {
+        this.showGreen = showGreen;
+    }
+
+    public boolean getGreen() {
+        return this.showGreen;
+    }
+
+    public void setBlue(boolean showBlue) {
+        this.showBlue = showBlue;
+    }
+
+    public boolean getBlue() {
+        return this.showBlue;
     }
 }

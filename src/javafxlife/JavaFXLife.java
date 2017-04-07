@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -63,11 +64,12 @@ public class JavaFXLife extends Application {
     public MenuBar myMenuBar() {
         MenuBar myBar = new MenuBar();
         final Menu fileMenu = new Menu("File");
+        final Menu colorMenu = new Menu("Color");
         final Menu speedMenu = new Menu("Speed");
         final Menu optionsMenu = new Menu("Options");
         final Menu helpMenu = new Menu("Help");
 
-        myBar.getMenus().addAll(fileMenu, speedMenu, optionsMenu, helpMenu);
+        myBar.getMenus().addAll(fileMenu, colorMenu, speedMenu, optionsMenu, helpMenu);
 
         /**
          * *********************************************************************
@@ -109,6 +111,24 @@ public class JavaFXLife extends Application {
         exit.setOnAction(e -> System.exit(0));
         fileMenu.getItems().add(exit);
 
+        /**
+         * *********************************************************************
+         * Color Menu Section
+         */
+        CheckMenuItem red = new CheckMenuItem("Red");
+        red.setAccelerator(KeyCombination.keyCombination("Ctrl+Shift+R"));
+        red.setOnAction(e -> lifePane.setRed(red.isSelected()));
+        colorMenu.getItems().add(red);
+        
+        CheckMenuItem green = new CheckMenuItem("Green");
+        green.setAccelerator(KeyCombination.keyCombination("Ctrl+Shift+G"));
+        green.setOnAction(e -> lifePane.setGreen(green.isSelected()));
+        colorMenu.getItems().add(green);
+        
+        CheckMenuItem blue = new CheckMenuItem("Blue");
+        blue.setAccelerator(KeyCombination.keyCombination("Ctrl+Shift+B"));
+        blue.setOnAction(e -> lifePane.setBlue(blue.isSelected()));
+        colorMenu.getItems().add(blue);
         /**
          * *********************************************************************
          * Speed Menu Section
@@ -171,16 +191,15 @@ public class JavaFXLife extends Application {
          * *********************************************************************
          * Help Menu Section
          */
-        
-        MenuItem jp = new MenuItem("JP");
-        jp.setOnAction(e -> {
+        MenuItem jr = new MenuItem("JR");
+        jr.setOnAction(e -> {
             lifePane.pause();
             lifePane.clearCells();
-            readFile(new File("jp.txt"));
+            readFile(new File("jr.txt"));
             lifePane.drawCells();
         });
-        helpMenu.getItems().add(jp);        
-        
+        helpMenu.getItems().add(jr);
+
         MenuItem acorn = new MenuItem("Acorn");
         acorn.setOnAction(e -> {
             lifePane.pause();
